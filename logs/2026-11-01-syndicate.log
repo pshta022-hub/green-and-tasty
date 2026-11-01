@@ -1,0 +1,52 @@
+2026-11-01 04:30:37,103 [INFO] USER:Anastasya handlers.py:118:syndicate LOG: Configuration used: C:\Users\Anastasya\marathon2026
+2026-11-01 04:30:37,104 [ERROR] USER:Anastasya decorators.py:148:wrapper LOG: ConfigurationError occurred: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
+2026-11-01 04:30:37,107 [ERROR] USER:Anastasya decorators.py:149:wrapper LOG: Traceback (most recent call last):
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\decorators.py", line 138, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\handlers.py", line 119, in syndicate
+    initialize_connection()
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\__init__.py", line 109, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\conf\processor.py", line 71, in __init__
+    raise ConfigurationError(
+syndicate.exceptions.ConfigurationError: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
+Traceback (most recent call last):
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\decorators.py", line 138, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\handlers.py", line 119, in syndicate
+    initialize_connection()
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\__init__.py", line 109, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\conf\processor.py", line 71, in __init__
+    raise ConfigurationError(
+syndicate.exceptions.ConfigurationError: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
+2026-11-01 04:36:47,038 [INFO] USER:Anastasya handlers.py:118:syndicate LOG: Configuration used: C:\Users\Anastasya\marathon2026
+2026-11-01 04:36:47,039 [ERROR] USER:Anastasya decorators.py:148:wrapper LOG: ConfigurationError occurred: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
+2026-11-01 04:36:47,042 [ERROR] USER:Anastasya decorators.py:149:wrapper LOG: Traceback (most recent call last):
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\decorators.py", line 138, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\handlers.py", line 119, in syndicate
+    initialize_connection()
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\__init__.py", line 109, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\conf\processor.py", line 71, in __init__
+    raise ConfigurationError(
+syndicate.exceptions.ConfigurationError: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
+Traceback (most recent call last):
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\decorators.py", line 138, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\handlers.py", line 119, in syndicate
+    initialize_connection()
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\__init__.py", line 109, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Anastasya\marathon2026\backend\restaurant-backend-app\syndicate_venv\Lib\site-packages\syndicate\core\conf\processor.py", line 71, in __init__
+    raise ConfigurationError(
+syndicate.exceptions.ConfigurationError: The syndicate configuration file is not found in the directory 'C:\Users\Anastasya\marathon2026'
