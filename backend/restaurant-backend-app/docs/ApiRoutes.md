@@ -1180,30 +1180,62 @@ Response: 200 OK
 ```
 
 ### `POST` /group-reservations/{groupReservationId}/submit
-Response: 200 OK
+Request body:
 ```json
 {
-  "message": "Group reservation pre-order submitted successfully."
+  "reservationId": "string"
 }
+```
+
+Response: 200 OK
+```json
+[
+  { "dishId": "string", "quantity": 0 }
+]
 ```
 
 ### `GET` /guest/groups/{groupReservationId}/sessions
 Response: 200 OK
 ```json
-[
+{
+  "participants": [
   {
     "id": "string",
-    "groupReservationId": "string",
-    "guestName": "string",
-    "status": "string"
+    "type": "Guest",
+    "name": "string",
+    "items": [
+      {
+        "dish": { "id": "string", "name": "string", "price": 0 },
+        "quantity": 0
+      }
+    ],
+    "total": 0,
+    "isSubmitted": true
   }
-]
+  ],
+  "total": 0
+}
 ```
 
 ### `DELETE` /guest/groups/{groupReservationId}/sessions/{guestSessionId}
 Response: 200 OK
 ```json
 {
-  "message": "Guest session removed from group successfully."
+  "participants": [
+    {
+      "id": "string",
+      "type": "Guest",
+      "name": "string",
+      "items": [
+        {
+          "dish": { "id": "string", "name": "string", "price": 0 },
+          "quantity": 0
+        }
+      ],
+      "total": 0,
+      "isSubmitted": true
+    }
+  ],
+  "total": 0
 }
 ```

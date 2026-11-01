@@ -8,6 +8,7 @@ namespace APIHandler.Services.Orders;
 public interface IOrderService
 {
     Task<Order?> GetOrderByReservationIdAsync(string reservationId);
+    Task<List<OrderItem>> AddGroupReservationDishesAsync(string reservationId, List<OrderItem> dishes);
 
     Task<IEnumerable<Order>> GetOrdersByCustomerIdAsync(string customerId);
 

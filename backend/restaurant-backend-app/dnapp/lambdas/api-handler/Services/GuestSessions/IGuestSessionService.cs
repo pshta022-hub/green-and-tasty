@@ -10,9 +10,12 @@ public interface IGuestSessionService
     Task AddDishAsync(string guestSessionId, string dishId, int quantity);
     Task RemoveDishAsync(string guestSessionId, string dishId, int quantity);
     Task<GroupReservationStatusResponse> GetGroupReservationStatusAsync(string groupReservationId);
+    Task<string> GetOwnerGuestSessionIdAsync(string userId, string reservationId);
     Task<bool> IsAuthorizedAsync(string guestSessionToken, string guestSessionId);
     Task SubmitCartAsync(string guestSessionId);
     Task<GuestMenuResponse> GetGuestMenuAsync(string guestSessionId);
+    Task CreateGroupOwnerSessionAsync(string userId, string groupReservationId);
+    Task<GetAllSessionsResponse> GetGroupReservationSessionsAsync(string userId, string groupReservationId);
     Task<GetAllSessionsResponse> DeleteGuestSessionAsync(string userId, string groupReservationId, string guestSessionId);
     Task<GetGuestSessionResponse> GetGuestSessionInfoAsync(string guestSessionId);
 }

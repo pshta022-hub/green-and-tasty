@@ -86,6 +86,27 @@ public class OrderService : IOrderService
         return await _orderRepository.GetOrderByReservationIdAsync(reservationId);
     }
 
+    public async Task<List<OrderItem>> AddGroupReservationDishesAsync(string reservationId, List<OrderItem> dishes)
+    {
+        var order = await _orderRepository.GetOrderByReservationIdAsync(reservationId)
+            ?? throw new ValidationException("Order not found.");
+
+        order.Dishes = order.Dishes
+            .Concat(dishes)
+            .GroupBy(item => item.DishId)
+            .Select(group => new OrderItem
+            {
+                DishId = group.Key,
+                Quantity = group.Sum(item => item.Quantity),
+                State = OrderItemState.Pending
+            })
+            .ToList();
+        order.Status = OrderStatus.SubmittedByCustomer;
+
+        await _orderRepository.SaveOrderAsync(order);
+        return order.Dishes;
+    }
+
     public async Task AddOrderAsync(Order order)
     {
         var reservation = await LoadReservationAsync(order.ReservationId);

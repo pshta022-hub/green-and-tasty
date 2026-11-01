@@ -76,6 +76,43 @@ public class OrderServiceTests
 
     [Theory]
     [AutoData]
+    public async Task AddGroupReservationDishesAsync_MergesItemsAndSubmitsOrder(Order order)
+    {
+        order.Dishes = [new OrderItem { DishId = "dish-a", Quantity = 2, State = OrderItemState.Confirmed }];
+        var additions = new List<OrderItem>
+        {
+            new() { DishId = "dish-a", Quantity = 3 },
+            new() { DishId = "dish-b", Quantity = 1 }
+        };
+        _mockOrderRepository
+            .Setup(r => r.GetOrderByReservationIdAsync(order.ReservationId))
+            .ReturnsAsync(order);
+
+        var result = await _orderService.AddGroupReservationDishesAsync(order.ReservationId, additions);
+
+        Assert.Equal(OrderStatus.SubmittedByCustomer, order.Status);
+        Assert.Equal(2, result.Count);
+        Assert.Contains(result, item => item.DishId == "dish-a" && item.Quantity == 5);
+        Assert.Contains(result, item => item.DishId == "dish-b" && item.Quantity == 1);
+        Assert.All(result, item => Assert.Equal(OrderItemState.Pending, item.State));
+        _mockOrderRepository.Verify(r => r.SaveOrderAsync(order), Times.Once);
+    }
+
+    [Theory]
+    [AutoData]
+    public async Task AddGroupReservationDishesAsync_OrderMissing_ThrowsValidationException(string reservationId)
+    {
+        _mockOrderRepository
+            .Setup(r => r.GetOrderByReservationIdAsync(reservationId))
+            .ReturnsAsync((Order?)null);
+
+        await Assert.ThrowsAsync<ValidationException>(() => _orderService.AddGroupReservationDishesAsync(
+            reservationId,
+            [new OrderItem { DishId = "dish-a", Quantity = 1 }]));
+    }
+
+    [Theory]
+    [AutoData]
     public async Task ConfirmPreOrderDishAsync_ShouldMarkDishConfirmed_AndSubmitOrderIfAllProcessed(Reservation reservation, Order order)
     {
         var callerId = "waiter-1";
