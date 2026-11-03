@@ -1,0 +1,99 @@
+<main class="page">
+  @if (errorMessage()) {
+    <div class="error-state">
+      @if (errorCode() === 404) {
+        <p>Group reservation not found</p>
+      } @else {
+        <p>{{ errorMessage() }}</p>
+        <button (click)="loadData()">Try again</button>
+      }
+    </div>
+  } @else {
+    <header class="page-header">
+      <h1>Group Pre-Order</h1>
+      @if (invite(); as inv) {
+        <div class="reservation-info">
+          <span>{{ inv.LocationAddress }}</span>
+          <span>{{ inv.StartTime | date:'MMM d, y' }}</span>
+          <span>{{ inv.StartTime | date:'HH:mm' }} - {{ inv.EndTime | date:'HH:mm' }}</span>
+          <span>{{ participants().length }} of {{ inv.MaxGuestCount }} guests</span>
+        </div>
+      }
+      @if (status(); as st) {
+        <span class="status-badge">{{ st.status === 'Open' ? 'Collecting pre-orders' : st.status }}</span>
+      }
+    </header>
+
+    @if (unsubmittedCount() > 0) {
+      <div class="warning-banner" role="region" aria-label="Notification">
+        <span>🔔 {{ unsubmittedCount() }} participant hasn’t submitted…</span>
+      </div>
+    }
+
+    @if (isEmptyOrder()) {
+      <div class="empty-state">
+        <p>Participants haven’t added any dishes yet</p>
+      </div>
+    } @else {
+      @if (ownerParticipant(); as owner) {
+        <section class="owner-section">
+          <h2>My Pre-Order</h2>
+          <app-participant-card [participant]="owner" />
+        </section>
+      }
+
+      <ul class="participants">
+        @for (person of otherParticipants(); track person.id) {
+          <li>
+            <app-participant-card [participant]="person" />
+          </li>
+        }
+      </ul>
+    }
+
+  <section class="consolidated-order">
+  <h2>Consolidated Pre-Order</h2>
+
+  <ul>
+    @for (item of consolidatedItems().items; track item.dish.id) {
+      <li class="consolidated-item">
+        <span>{{ item.dish.name }} × {{ item.quantity }}</span>
+        <span>
+          {{ item.dish.price * item.quantity | currency:'USD':'symbol':'1.2-2' }}
+        </span>
+      </li>
+    }
+  </ul>
+  </section>
+
+    <footer class="footer-section">
+      <div class="grand-total">
+        <h2>Grand Total</h2>
+        <p>{{ grandTotal() | currency:'USD':'symbol':'1.2-2' }}</p>
+      </div>
+
+      @if (isSubmittedSuccess()) {
+        <p class="success-text">Sent to Restaurant</p>
+      } @else {
+        <button 
+          class="submit-btn" 
+          [disabled]="!hasSubmittedParticipants() || isSubmitting()"
+          (click)="submitPreOrder()">
+          {{ isSubmitting() ? 'Submitting…' : 'Submit Pre-Order' }}
+        </button>
+      }
+    </footer>
+  }
+
+  <!-- Модальне вікно підтвердження сабміту -->
+  @if (showModal()) {
+    <div role="dialog" class="modal-backdrop">
+      <div class="modal-content">
+        <h2>Confirm Submit</h2>
+        <p>Are you sure you want to submit the pre-order?</p>
+        <button (click)="confirmSubmit()">Submit</button>
+        <button (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  }
+</main>

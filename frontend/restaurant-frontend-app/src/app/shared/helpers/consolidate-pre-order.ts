@@ -1,3 +1,4 @@
+
 export interface Dish {
   id: string;
   name: string;
@@ -22,12 +23,19 @@ export function consolidatePreOrder(participants: Participant[]): ConsolidatedOr
   for (const participant of participants.filter((person) => person.isSubmitted)) {
     for (const item of participant.items) {
       const existing = byDish.get(item.dish.id);
-      // завжди НОВИЙ об'єкт — вхідні дані не змінюються
-      byDish.set(item.dish.id, { dish: item.dish, quantity: (existing?.quantity ?? 0) + item.quantity });
+
+      byDish.set(item.dish.id, {
+        dish: item.dish,
+        quantity: (existing?.quantity ?? 0) + item.quantity,
+      });
     }
   }
 
   const items = [...byDish.values()];
-  const total = items.reduce((sum, item) => sum + item.dish.price * item.quantity, 0);
+  const total = items.reduce(
+    (sum, item) => sum + item.dish.price * item.quantity,
+    0
+  );
+
   return { items, total };
 }
